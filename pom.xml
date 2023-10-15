@@ -35,6 +35,12 @@
                 </compilerArgs>
             </properties>
         </profile>
+        <profile>
+            <id>jdk8_profile</id>
+            <properties>
+                <jdk.version>8</jdk.version>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencyManagement>

@@ -18,11 +18,11 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-@BenchmarkMode(Mode.AverageTime)
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 @Warmup(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Measurement(iterations = 5, time = 10, timeUnit = TimeUnit.SECONDS)
-@Fork(value = 5)
+@Measurement(iterations = 3, time = 10, timeUnit = TimeUnit.SECONDS)
+@Fork(value = 1)
 @State(Scope.Benchmark)
 public class ThreadLocalRandomBenchmark {
 
@@ -75,10 +75,10 @@ public class ThreadLocalRandomBenchmark {
         return randomGenerator.nextGaussian();
     }
 
-    @Benchmark
-    public double next_exponential() {
-        return randomGenerator.nextExponential();
-    }
+//    @Benchmark
+//    public double next_exponential() {
+//        return randomGenerator.nextExponential();
+//    }
 
     @Benchmark
     public DoubleStream doubles() {
