@@ -1,4 +1,4 @@
-package org.example.random;
+package org.example.benchmark;
 
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
