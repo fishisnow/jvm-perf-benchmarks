@@ -1,0 +1,20 @@
+#!/bin/bash
+
+APP_NAME=spring-boot-benchmarks
+LOG_PATH=/data/logs/$APP_NAME
+
+SERVER_OPTS="-server -Xms2G -Xmx2G -Xmn1G"
+SERVER_OPTS="$SERVER_OPTS -XX:+UnlockExperimentalVMOptions -XX:+UseZGC "
+SERVER_OPTS="$SERVER_OPTS -Xlog:gc*:$LOG_PATH/gc.log:time,uptime:filecount=3,filesize=50M"
+SERVER_OPTS="$SERVER_OPTS -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=$LOG_PATH"
+
+if [ -f "./MyPerf4J/MyPerf4J-ASM.jar" ] && [ -f  "./MyPerf4J/MyPerf4J.properties" ]
+then
+    SERVER_OPTS="$SERVER_OPTS -javaagent:./MyPerf4J/MyPerf4J-ASM.jar -DMyPerf4JPropFile=./MyPerf4J/MyPerf4J.properties"
+fi
+
+cmd="java
+$SERVER_OPTS
+-jar spring-boot-benchmarks.jar"
+
+exec $cmd >>$LOG_PATH/stdout.log 2>>$LOG_PATH/stderr.log
